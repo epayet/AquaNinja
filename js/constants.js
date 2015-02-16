@@ -47,11 +47,13 @@ module.exports = {
     nbMaxStepsOnScreen: 20,
     Paths: {
         Models: {
-            Ninja: "assets/3d/ninja/ninja.json"
+            Ninja: "assets/3d/ninja/ninja.json",
+            Algatana: "assets/3d/Katanalgue/Katanalgue.json"
         },
 
         Skins: {
             Ninja: "assets/3d/ninja/nskinbr.jpg",
+            Algatana: "assets/3d/Katanalgue/KatanaPommeau",
             Sand: "assets/textures/saand.jpg"
         }
     },
