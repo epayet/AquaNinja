@@ -44,6 +44,10 @@ module.exports = {
             scene.add(element);
     },
 
+    removeSceneElement: function(element) {
+        scene.remove(element);
+    },
+
     addSceneAnimatedElement: function(element) {
         scene.add(element);
         animatedElements.push(element);

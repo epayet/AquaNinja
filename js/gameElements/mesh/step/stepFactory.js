@@ -1,4 +1,3 @@
-var gameEngine = require('../../../gameEngine/gameEngine');
 var Constants = require('../../../constants');
 
 var Pyraken = require('./Pyraken');
@@ -11,37 +10,16 @@ var StepMeshes = {
     'algatana': Algatana
 };
 
-var stepsAdded = 0;
-
-module.exports = {
-    addSteps: function(steps) {
-        for(var i=0; i<steps.length; i++) {
-            addStep(steps[i]);
-        }
-    },
-    add: addStep,
-    resetStepsRank: function() {
-        stepsAdded = 0;
-    }
-};
+module.exports = addStep;
 
 function addStep(step) {
+    var stepMesh;
     if(step.state.name != Constants.stepState.NOTHING.name) {
-        var stepMesh = createStepMesh(step);
-        gameEngine.addSceneElement(stepMesh.mesh);
-        gameEngine.addRenderElement(stepMesh);
-        gameEngine.addCameraObservationElement(stepMesh.mesh, function () {
-            console.log('plus dedans la camera');
-        });
+        var meshType = getMeshTypeForStep(step.state.name);
+        var StepMesh = StepMeshes[meshType];
+        stepMesh = new StepMesh(step);
     }
-    stepsAdded++;
-    console.log(stepsAdded);
-}
-
-function createStepMesh(step) {
-    var meshType = getMeshTypeForStep(step.state.name);
-    var StepMesh = StepMeshes[meshType];
-    return new StepMesh(stepsAdded);
+    return stepMesh;
 }
 
 function getMeshTypeForStep(stepName) {

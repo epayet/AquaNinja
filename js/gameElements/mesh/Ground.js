@@ -6,7 +6,6 @@ var Ground = function(rank) {
 
 Ground.prototype.update = function(delta) {
     this.mesh.position.z += delta * 10;
-    //console.log(this.mesh.position);
 };
 
 Ground.setPositionForRank = function(rank, plane) {

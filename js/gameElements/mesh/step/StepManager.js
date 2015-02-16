@@ -1,30 +1,31 @@
 var stepFactory = require('./stepFactory');
 var Constants = require('../../../constants');
+var stepPool = require('./stepPool');
 
 function StepManager(gameplay) {
     this.gameplay = gameplay;
-    this.stepsPassed = 0;
 
-    var self = this;
     gameplay.addEventListener("onNextStep", function () {
-        self.stepPassed();
+        var lastStepToShow = gameplay.getStepAfter(Constants.nbMaxStepsOnScreen);
+        var stepType = lastStepToShow.state.name;
+        if(stepType != Constants.stepState.NOTHING.name) {
+            var stepMesh = stepPool.get(lastStepToShow);
+            stepMesh.updatePosition(Constants.nbMaxStepsOnScreen - 1);
+        }
     });
 
-    this.addNextSteps();
+    this.addFirstSteps();
 }
 
-StepManager.prototype.stepPassed = function() {
-    this.stepsPassed++;
-    if(this.stepsPassed > Constants.nbMaxStepsOnScreen) {
-        this.addNextSteps();
-        this.stepsPassed = 0;
-        stepFactory.resetStepsRank();
-    }
-};
-
-StepManager.prototype.addNextSteps = function() {
+StepManager.prototype.addFirstSteps = function() {
     var nextSteps = this.gameplay.getNextXSteps(Constants.nbMaxStepsOnScreen);
-    stepFactory.addSteps(nextSteps);
+    for(var i=0; i<nextSteps.length; i++) {
+        var stepType = nextSteps[i].state.name;
+        if(stepType != Constants.stepState.NOTHING.name) {
+            var stepMesh = stepPool.get(nextSteps[i]);
+            stepMesh.updatePosition(i);
+        }
+    }
 };
 
 module.exports = StepManager;

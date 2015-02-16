@@ -1,22 +1,20 @@
-var stepFactory = require('./stepFactory');
-var Constants = require('../../../constants');
+var StepMesh = require('./StepMesh');
 
-function Algatana(stepRank) {
-    this.mesh = createMesh(stepRank);
+function Algatana(step) {
+    StepMesh.call(this, step);
 }
 
-Algatana.prototype.update = function(delta) {
-    //this.mesh.position.z += delta * 10;
+Algatana.prototype = Object.create(StepMesh.prototype);
+
+Algatana.prototype.createMesh = function() {
+    this.mesh = createMesh();
 };
 
 module.exports = Algatana;
 
-function createMesh(rank) {
+function createMesh() {
     var cubeGeometry = new THREE.BoxGeometry(6, 4, 6);
     var cubeMaterial = new THREE.MeshLambertMaterial({color: 'green', transparent: true});
     cubeMaterial.ambient = cubeMaterial.color;
-    var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-    cube.position.x = - 20;
-    cube.position.z = rank * -Constants.distanceBetweenSteps;
-    return cube;
+    return new THREE.Mesh(cubeGeometry, cubeMaterial);
 }

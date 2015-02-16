@@ -48,6 +48,10 @@ Gameplay.prototype.getNextXSteps = function(nbSteps) {
     return race.getNextXSteps(nbSteps);
 };
 
+Gameplay.prototype.getStepAfter = function(nbStepAfter) {
+    return race.getStepAfter(nbStepAfter);
+};
+
 Gameplay.prototype.updateStep = function() {
     return race.goNextStep();
 };

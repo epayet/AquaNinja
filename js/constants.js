@@ -44,8 +44,8 @@ module.exports = {
         'SLIDE': 'death'
     },
     timeBetweenSteps: 4000,
-    distanceBetweenSteps: 10,
-    nbMaxStepsOnScreen: 1,
+    distanceBetweenSteps: 40,
+    nbMaxStepsOnScreen: 3,
     Paths: {
         Models: {
             Ninja: "assets/3d/ninja/ninja.json"

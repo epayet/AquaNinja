@@ -23,5 +23,9 @@ module.exports = {
             askedSteps.push(steps[i]);
         }
         return askedSteps;
+    },
+
+    getStepAfter: function(nbSteps) {
+        return steps[stepsPassed + nbSteps];
     }
 };
