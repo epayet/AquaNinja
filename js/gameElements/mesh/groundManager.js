@@ -1,7 +1,8 @@
 var Ground = require('./Ground');
 var gameEngine = require('../../gameEngine/gameEngine');
+var Constants = require('../../constants');
 
-var nbMaxGrounds = 1;
+var nbMaxGrounds = 3;
 
 module.exports = {
     start: function() {
@@ -9,8 +10,8 @@ module.exports = {
             var ground = new Ground(i);
             gameEngine.addSceneElement(ground.mesh);
             gameEngine.addRenderElement(ground);
-            gameEngine.addCameraObservationElement(ground.mesh, function () {
-                console.log('plus dedans la camera');
+            gameEngine.addCameraObservationElement(ground.mesh, function (disappearedGround) {
+                Ground.setPositionForRank(nbMaxGrounds - 1, disappearedGround);
             });
         }
     }

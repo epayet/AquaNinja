@@ -7,6 +7,7 @@ var renderElements = [], animatedElements = [], cameraObservationElements = [];
 var models = {};
 var renderer;
 var clock = new THREE.Clock();
+var limitTerrain;
 
 var eventListener = require('./eventListener');
 
@@ -14,6 +15,9 @@ window.onkeydown = eventListener.create('onKeyDown');
 window.onkeyup = eventListener.create('onKeyUp');
 
 module.exports = {
+    setLimitTerrain: function(limit) {
+        limitTerrain = limit;
+    },
     setCamera: function(newCamera) {
         camera = newCamera;
         camera.lookAt(scene.position);
@@ -133,7 +137,7 @@ function render() {
 
     for(var i=0; i<cameraObservationElements.length; i++) {
         if(!isStillInScreen(cameraObservationElements[i].element)) {
-            //cameraObservationElements[i].callback();
+            cameraObservationElements[i].callback(cameraObservationElements[i].element);
         }
     }
 
@@ -146,7 +150,5 @@ function render() {
 
 //TODO
 function isStillInScreen(element) {
-    if(element.position.z > 90) {
-        console.log('plus');
-    }
+    return !(element.position.z > limitTerrain);
 }
