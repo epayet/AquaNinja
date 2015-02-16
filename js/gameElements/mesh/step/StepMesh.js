@@ -1,9 +1,10 @@
 var Constants = require('../../../constants');
+var timeManager = require('../../../timeManager');
 
 function StepMesh(step) {
     this.createMesh();
     this.stepType = step.state.name;
-    this.mesh.position.x = - 20;
+    //this.mesh.position.x = - 20;
 }
 
 StepMesh.prototype.updatePosition = function(rank) {
@@ -17,7 +18,7 @@ StepMesh.prototype.resetPosition = function() {
 };
 
 StepMesh.prototype.update = function(delta) {
-    this.mesh.position.z += delta * 10;
+    this.mesh.position.z += timeManager.getDistanceForDelta(delta);
 };
 
 module.exports = StepMesh;

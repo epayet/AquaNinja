@@ -25,7 +25,8 @@ Gameplay.prototype.initSteps = function () {
     for(var i=0; i<100; i++) {
         var rand = Math.floor(Math.random() * nbSteps);
         var randomStepName = availableSteps[rand];
-        steps.push(new Step({rank: i, state: stepStates[randomStepName]}));
+        if(randomStepName != 'NOTHING')
+            steps.push(new Step({rank: i, state: stepStates[randomStepName]}));
     }
 
     race.setSteps(steps);
@@ -41,6 +42,7 @@ Gameplay.prototype.goNextStep = function() {
     for(var i=0; i<this.listeners["onNextStep"].length; i++) {
         this.listeners["onNextStep"][i]();
     }
+    console.log('nextStep');
     //return this.isDead(newState, newStep);
 };
 
