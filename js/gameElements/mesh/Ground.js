@@ -1,11 +1,12 @@
 var Constants = require("../../Constants");
+var timeManager = require('../../timeManager');
 
 var Ground = function(rank) {
     this.mesh = createMesh(rank);
 };
 
 Ground.prototype.update = function(delta) {
-    this.mesh.position.z += delta * 10;
+    this.mesh.position.z += timeManager.getDistanceForDelta(delta);
 };
 
 Ground.setPositionForRank = function(rank, plane) {

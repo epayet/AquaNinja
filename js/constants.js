@@ -42,9 +42,9 @@ module.exports = {
         'ATTACK': 'spinningattack', //spinning, spin, punch, jump
         'SLIDE': 'death'
     },
-    timeBetweenSteps: 4000,
-    distanceBetweenSteps: 10,
-    nbMaxStepsOnScreen: 20,
+    timeBetweenSteps: 3000,
+    distanceBetweenSteps: 30,
+    nbMaxStepsOnScreen: 10,
     Paths: {
         Models: {
             Ninja: "assets/3d/ninja/ninja.json"
