@@ -2,7 +2,8 @@ var gulp = require('gulp');
 var browserify = require('gulp-browserify');
 var rename = require("gulp-rename");
 var concat = require('gulp-concat');
-var connect = require('gulp-connect');
+var browserSync = require('browser-sync');
+var reload = browserSync.reload;
 
 gulp.task("default", ["build", "watch", "server"]);
 gulp.task("build", ["scripts", "libs"]);
@@ -29,12 +30,15 @@ gulp.task('libs', function() {
 });
 
 gulp.task("server", function() {
-    return connect.server({
-        livereload: true,
+    return browserSync({
+        notify: false,
+        server: {
+            baseDir: ['.']
+        },
         port: port
     });
 });
 
 gulp.task("watch", function() {
-    return gulp.watch("js/**", ["scripts"]);
+    return gulp.watch("js/**", ["scripts", reload]);
 });

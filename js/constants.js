@@ -69,6 +69,6 @@ module.exports = {
 
     TerrainSize: {
         width: 60,
-        height: 100
+        height: 50
     }
 };

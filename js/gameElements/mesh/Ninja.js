@@ -14,7 +14,7 @@ var Ninja = function(character) {
 Ninja.prototype.createMesh = function() {
     var ninjaModel = gameEngine.models[Constants.Models.Ninja];
     var mesh = createMesh(ninjaModel);
-    mesh.position.z = Constants.TerrainSize.width/2;
+    //mesh.position.z = Constants.TerrainSize.width/2;
     mesh.parseAnimations();
     return mesh;
 };

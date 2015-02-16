@@ -3,7 +3,7 @@ var async = require("async");
 var camera;
 var scene = new THREE.Scene;
 var width, height;
-var renderElements = [], animatedElements = [];
+var renderElements = [], animatedElements = [], cameraObservationElements = [];
 var models = {};
 var renderer;
 var clock = new THREE.Clock();
@@ -51,6 +51,13 @@ module.exports = {
 
     cameraFollow: function(element) {
         element.add(camera);
+    },
+
+    addCameraObservationElement: function(sceneElement, callbackWhenOffScreen) {
+        cameraObservationElements.push({
+            element: sceneElement,
+            callback: callbackWhenOffScreen
+        });
     },
 
     loadModels: function(modelPaths, callback) {
@@ -124,9 +131,22 @@ function render() {
         animatedElements[i].updateAnimation(delta * 1000);
     }
 
+    for(var i=0; i<cameraObservationElements.length; i++) {
+        if(!isStillInScreen(cameraObservationElements[i].element)) {
+            //cameraObservationElements[i].callback();
+        }
+    }
+
     THREE.AnimationHandler.update(delta);
 
     // render using requestAnimationFrame
     requestAnimationFrame(render);
     renderer.render(scene, camera);
+}
+
+//TODO
+function isStillInScreen(element) {
+    if(element.position.z > 90) {
+        console.log('plus');
+    }
 }

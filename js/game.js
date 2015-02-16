@@ -5,6 +5,7 @@ var Constants = require('./constants');
 var CommandListener = require('./eventListener/CommandListener');
 var Ninja = require('./gameElements/mesh/Ninja');
 var Ground = require('./gameElements/mesh/Ground');
+var groundManager = require('./gameElements/mesh/groundManager');
 
 module.exports = {
     init: function(width, height) {
@@ -14,18 +15,19 @@ module.exports = {
                 commands: Constants.commandMap
             });
             var ninja = new Ninja(character);
-            var ground = new Ground();
+            //var ground = new Ground();
+            groundManager.start();
 
             gameEngine.setSize(width, height);
 
             gameEngine.addRenderElement(require("./gameEngine/misc/stats"));
             //gameEngine.addRenderElement(require("./gameEngine/controls/orbitControls"));
-            gameEngine.addRenderElement(ground);
+            //gameEngine.addRenderElement(ground);
 
             gameEngine.setCamera(require("./gameElements/camera"));
             gameEngine.addSceneElement(require("./gameElements/light"));
 
-            gameEngine.addSceneElement(ground.mesh);
+            //gameEngine.addSceneElement(ground.mesh);
             gameEngine.addSceneAnimatedElement(ninja.mesh);
 
             gameEngine.start();
