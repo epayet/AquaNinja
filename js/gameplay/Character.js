@@ -12,7 +12,6 @@ Character.prototype.addEventListener = function(eventType, callback) {
 };
 
 Character.prototype.setCommand = function(command) {
-    console.log('Command asked: ' + command);
     this.nextState = this.getStateForCommand(command);
 };
 

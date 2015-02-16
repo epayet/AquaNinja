@@ -8,20 +8,18 @@ var Ninja = function(character) {
     });
 
     this.mesh = this.createMesh();
-    this.previousState = Constants.ninjaState.DEFAULT;
+    this.updateState(Constants.ninjaState.DEFAULT);
 };
 
 Ninja.prototype.createMesh = function() {
     var ninjaModel = gameEngine.models[Constants.Models.Ninja];
     var mesh = createMesh(ninjaModel);
-    mesh.position.z = Constants.TerrainSize/2 + 5;
+    mesh.position.z = Constants.TerrainSize.width/2;
     mesh.parseAnimations();
-    mesh.playAnimation('walk', 15);
     return mesh;
 };
 
 Ninja.prototype.updateState = function(state) {
-    console.log(state);
     if(state != this.previousState) {
         var animation = this.getAnimationForState(state);
         this.mesh.playAnimation(animation, 15);

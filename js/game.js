@@ -4,6 +4,7 @@ var Character = require('./gameplay/Character');
 var Constants = require('./constants');
 var CommandListener = require('./eventListener/CommandListener');
 var Ninja = require('./gameElements/mesh/Ninja');
+var Ground = require('./gameElements/mesh/Ground');
 
 module.exports = {
     init: function(width, height) {
@@ -13,19 +14,19 @@ module.exports = {
                 commands: Constants.commandMap
             });
             var ninja = new Ninja(character);
+            var ground = new Ground();
 
             gameEngine.setSize(width, height);
 
             gameEngine.addRenderElement(require("./gameEngine/misc/stats"));
             //gameEngine.addRenderElement(require("./gameEngine/controls/orbitControls"));
-            gameEngine.addRenderElement(require('./gameElements/mesh/plane'));
+            gameEngine.addRenderElement(ground);
 
             gameEngine.setCamera(require("./gameElements/camera"));
             gameEngine.addSceneElement(require("./gameElements/light"));
 
-            gameEngine.addSceneElement(require("./gameElements/mesh/plane").mesh);
+            gameEngine.addSceneElement(ground.mesh);
             gameEngine.addSceneAnimatedElement(ninja.mesh);
-            //gameEngine.cameraFollow(ninja.mesh);
 
             gameEngine.start();
 
@@ -40,7 +41,6 @@ module.exports = {
                 var newState = character.updateState();
                 var newStep = gameplay.updateStep();
                 var dead = gameplay.isDead(newState, newStep);
-                console.log('dead: ' + dead);
             }, Constants.timeBetweenSteps);
         });
     },

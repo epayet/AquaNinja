@@ -67,5 +67,8 @@ module.exports = {
         Ninja: "Ninja"
     },
 
-    TerrainSize: 60
+    TerrainSize: {
+        width: 60,
+        height: 100
+    }
 };
