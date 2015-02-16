@@ -7,11 +7,7 @@ function StepManager(gameplay) {
 
     gameplay.addEventListener("onNextStep", function () {
         var lastStepToShow = gameplay.getStepAfter(Constants.nbMaxStepsOnScreen);
-        var stepType = lastStepToShow.state.name;
-        if(stepType != Constants.stepState.NOTHING.name) {
-            var stepMesh = stepPool.get(lastStepToShow);
-            stepMesh.updatePosition(Constants.nbMaxStepsOnScreen - 1);
-        }
+        createStepMesh(lastStepToShow, Constants.nbMaxStepsOnScreen - 1);
     });
 
     this.addFirstSteps();
@@ -20,12 +16,16 @@ function StepManager(gameplay) {
 StepManager.prototype.addFirstSteps = function() {
     var nextSteps = this.gameplay.getNextXSteps(Constants.nbMaxStepsOnScreen);
     for(var i=0; i<nextSteps.length; i++) {
-        var stepType = nextSteps[i].state.name;
-        if(stepType != Constants.stepState.NOTHING.name) {
-            var stepMesh = stepPool.get(nextSteps[i]);
-            stepMesh.updatePosition(i);
-        }
+        createStepMesh(nextSteps[i], i);
     }
 };
+
+function createStepMesh(step, rank) {
+    var stepType = step.state.name;
+    if(stepType != Constants.stepState.NOTHING.name) {
+        var stepMesh = stepPool.get(step);
+        stepMesh.updatePosition(rank);
+    }
+}
 
 module.exports = StepManager;

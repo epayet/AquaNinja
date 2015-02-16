@@ -19,11 +19,11 @@ function createMesh(rank) {
     var planeTexture = THREE.ImageUtils.loadTexture(Constants.Paths.Skins.Sand);
     var planeGeometry = new THREE.PlaneGeometry(Constants.TerrainSize.width,Constants.TerrainSize.height);
 
-    var colors = ["red", "green", "blue"];
-    var planeMaterial = new THREE.MeshLambertMaterial({color: colors[rank]});
-    planeMaterial.ambient = planeMaterial.color;
+    //var colors = ["red", "green", "blue"];
+    //var planeMaterial = new THREE.MeshLambertMaterial({color: colors[rank]});
+    //planeMaterial.ambient = planeMaterial.color;
 
-    //var planeMaterial = new THREE.MeshPhongMaterial({map: planeTexture});
+    var planeMaterial = new THREE.MeshPhongMaterial({map: planeTexture});
 
     var plane = new THREE.Mesh(planeGeometry, planeMaterial);
     //plane.receiveShadow = true;

@@ -14,16 +14,15 @@ module.exports = {
         ALGATANA: {
             counter: ['JUMP'],
             name: "ALGATANA"
+        },
+        PYRAKEN: {
+            counter: ['ATTACK'],
+            name: "PYRAKEN"
+        },
+        IVREROCHER: {
+            counter: ['SLIDE'],
+            name: "IVREROCHER"
         }
-        //},
-        //PYRAKEN: {
-        //    counter: ['ATTACK'],
-        //    name: "PYRAKEN"
-        //},
-        //IVREROCHER: {
-        //    counter: ['SLIDE'],
-        //    name: "IVREROCHER"
-        //}
     },
     commandMap: {
         'UP': 'JUMP',
@@ -44,8 +43,8 @@ module.exports = {
         'SLIDE': 'death'
     },
     timeBetweenSteps: 4000,
-    distanceBetweenSteps: 40,
-    nbMaxStepsOnScreen: 3,
+    distanceBetweenSteps: 10,
+    nbMaxStepsOnScreen: 20,
     Paths: {
         Models: {
             Ninja: "assets/3d/ninja/ninja.json"

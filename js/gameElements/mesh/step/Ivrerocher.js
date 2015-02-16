@@ -1,11 +1,20 @@
-var stepFactory = require('./stepFactory');
+var StepMesh = require('./StepMesh');
 
-function IvreRocher(stepRank) {
-    this.mesh = stepFactory.stepRank(stepRank);
+function Ivrerocher(step) {
+    StepMesh.call(this, step);
 }
 
-IvreRocher.prototype.update = function(delta) {
+Ivrerocher.prototype = Object.create(StepMesh.prototype);
 
+Ivrerocher.prototype.createMesh = function() {
+    this.mesh = createMesh();
 };
 
-module.exports = IvreRocher;
+module.exports = Ivrerocher;
+
+function createMesh() {
+    var cubeGeometry = new THREE.BoxGeometry(6, 4, 6);
+    var cubeMaterial = new THREE.MeshLambertMaterial({color: 'blue', transparent: true});
+    cubeMaterial.ambient = cubeMaterial.color;
+    return new THREE.Mesh(cubeGeometry, cubeMaterial);
+}
