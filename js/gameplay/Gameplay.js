@@ -6,7 +6,9 @@ var Gameplay = function(options) {
     this.race = race;
     this.character = options.character;
     this.listeners = {
-        onNextStep: []
+        onNextStep: [],
+        onDead: [],
+        onNextRealStep: []
     };
     this.nbMaxSteps = options.nbMaxSteps;
     this.generator = new Generator({
@@ -32,8 +34,15 @@ Gameplay.prototype.addEventListener = function(eventType, callback) {
 Gameplay.prototype.goNextStep = function() {
     var newState = this.character.updateState();
     var newStep = this.updateStep();
+    //console.log("State: " + newState + ", step: " + newStep.state.name);
+    //console.log(newStep.state.name);
     for(var i=0; i<this.listeners["onNextStep"].length; i++) {
-        this.listeners["onNextStep"][i]();
+        this.listeners["onNextStep"][i](newStep);
+    }
+    for(var i=0; i<this.listeners["onNextRealStep"].length; i++) {
+        if(newStep.state.name != this.stepStates.NOTHING.name) {
+            this.listeners["onNextRealStep"][i](newStep);
+        }
     }
     this.updateSteps();
     return !this.isDead(newState, newStep);
@@ -56,13 +65,21 @@ Gameplay.prototype.updateSteps = function() {
     var steps = race.getSteps();
     var limit = (steps.length * 70) / 100;
     if(stepsPassed > limit) {
-        var nextSteps = this.generator.generate();
+        var nextSteps = this.generator.generate(race.getStepsPassed() - 1);
         race.addSteps(nextSteps);
     }
 };
 
 Gameplay.prototype.isDead = function(state, step) {
-    return !step.acceptState(state);
+    var dead = !step.acceptState(state);
+    if(dead) {
+        //console.log("State: " + state + ", step: " + step.state.name);
+        //debugger;
+        for(var i=0; i<this.listeners["onDead"].length; i++) {
+            this.listeners["onDead"][i]();
+        }
+    }
+    return dead;
 };
 
 module.exports = Gameplay;

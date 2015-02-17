@@ -14,11 +14,12 @@ Generator.prototype.getAvailableStates = function() {
     return availableSteps;
 };
 
-Generator.prototype.generate = function() {
+Generator.prototype.generate = function(start) {
+    if(start === undefined) start = 0;
     var steps = [];
     for(var i=0; i<this.nbMaxSteps; i++) {
         var randomStepName = this.getRandomStep();
-        steps.push(new Step({rank: i, state: this.stepStates[randomStepName]}));
+        steps.push(new Step({rank: start + i, state: this.stepStates[randomStepName]}));
     }
     return steps;
 };

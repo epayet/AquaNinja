@@ -35,7 +35,6 @@ module.exports = {
 
     addSteps: function(nextSteps) {
         steps = steps.concat(nextSteps);
-        console.log(steps);
     },
 
     getSteps: function () {

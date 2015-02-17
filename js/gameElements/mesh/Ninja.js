@@ -17,7 +17,7 @@ Ninja.prototype.createMesh = function() {
     //mesh.position.z = Constants.TerrainSize.width/2;
     mesh.parseAnimations();
     mesh.defaultAnimation = this.getAnimationForState(Constants.ninjaState.DEFAULT);
-    mesh.defaultAnimationTime = 15;
+    mesh.defaultAnimationTime = 20;
     return mesh;
 };
 

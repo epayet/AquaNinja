@@ -3,3 +3,9 @@ body {
     margin: 0;
     overflow: hidden;
 }
+
+#message {
+    margin-top: 100px;
+    margin-left: 300px;
+    font-size: 40px;
+}

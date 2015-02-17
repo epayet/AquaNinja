@@ -9,18 +9,19 @@ module.exports = {
     },
     stepState: {
         NOTHING: {
-            counter: ['RUN'],
+            counter: ['RUN', 'JUMP', 'SLIDE', 'ATTACK'],
             name: "NOTHING"
-        },
+        }
+        ,
         ALGATANA: {
             counter: ['JUMP'],
             name: "ALGATANA"
         }
-        ,
-        PYRAKEN: {
-            counter: ['ATTACK'],
-            name: "PYRAKEN"
-        }
+        //,
+        //PYRAKEN: {
+        //    counter: ['ATTACK'],
+        //    name: "PYRAKEN"
+        //}
         //,
         //IVREROCHER: {
         //    counter: ['SLIDE'],
@@ -29,8 +30,8 @@ module.exports = {
     },
     commandMap: {
         'UP': 'JUMP',
-        'SPACE': 'ATTACK',
-        'DOWN': 'SLIDE'
+        'SPACE': 'ATTACK'
+        //,'DOWN': 'SLIDE'
     },
     keyboard: {
         81: 'LEFT',
@@ -47,7 +48,7 @@ module.exports = {
         'DEATH': 'frontdeath'
     },
     timeBetweenSteps: 2000,
-    distanceBetweenSteps: 30,
+    distanceBetweenSteps: 20,
     nbMaxStepsOnScreen: 10,
     nbMaxSteps: 100,
     Paths: {

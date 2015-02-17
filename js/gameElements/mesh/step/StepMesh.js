@@ -5,6 +5,7 @@ function StepMesh(step) {
     this.createMesh();
     this.stepType = step.state.name;
     //this.mesh.position.x = - 20;
+    //this.mesh.position.z -= 50;
 }
 
 StepMesh.prototype.updatePosition = function(rank) {

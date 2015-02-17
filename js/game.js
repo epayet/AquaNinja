@@ -6,13 +6,16 @@ var CommandListener = require('./eventListener/CommandListener');
 var Ninja = require('./gameElements/mesh/Ninja');
 var groundManager = require('./gameElements/mesh/groundManager');
 var StepManager = require('./gameElements/mesh/step/StepManager');
+var Score = require('./gameElements/score');
 
 module.exports = {
     init: function(width, height) {
         gameEngine.setLimitTerrain(Constants.TerrainSize.height);
         gameEngine.setCamera(require("./gameElements/camera"));
         gameEngine.loadModels(Constants.Paths.Models, function () {
-            console.log('finished loading');
+            var messageBox = document.getElementById('message');
+            messageBox.style.display = "none";
+
             var character = new Character({
                 availableStates: Constants.ninjaState,
                 commands: Constants.commandMap
@@ -22,16 +25,6 @@ module.exports = {
                 character: character,
                 nbMaxSteps: Constants.nbMaxSteps
             });
-
-            //for(var i=0; i<1; i++) {
-            //    var mesh = gameEngine.getModel(Constants.Models.Piraken);
-            //    mesh.rotation.y = 0.5 * Math.PI;
-            //    mesh.position.y = 5;
-            //    mesh.position.x = -i;
-            //    var scale = 10;
-            //    mesh.scale.set(scale, scale, scale);
-            //    gameEngine.addSceneElement(mesh);
-            //}
 
             var ninja = new Ninja(character);
             window.ninja = ninja;
@@ -55,9 +48,14 @@ module.exports = {
             var commandListener = new CommandListener(character);
             gameEngine.addEventListener("onKeyDown", commandListener.createCallback());
 
+            var score = new Score(gameplay);
+
+            gameplay.addEventListener("onDead", function () {
+                ninja.updateState("DEATH");
+            });
+
             setInterval(function () {
-                if(!gameplay.goNextStep())
-                    ninja.updateState("DEATH")
+                gameplay.goNextStep();
             }, Constants.timeBetweenSteps);
         });
     },
