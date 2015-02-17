@@ -23,7 +23,7 @@ gulp.task('scripts', function() {
 
 gulp.task('libs', function() {
     // Single entry point to browserify
-    return gulp.src(['libs/three.js', 'libs/**/**'])
+    return gulp.src(['libs/three.min.js', 'libs/**/**'])
         .pipe(rename("app.min.js"))
         .pipe(concat('libs.min.js'))
         .pipe(gulp.dest('dist'))

@@ -11,6 +11,7 @@ module.exports = {
     init: function(width, height) {
         gameEngine.setLimitTerrain(Constants.TerrainSize.height);
         gameEngine.loadModels(Constants.Paths.Models, function () {
+            console.log('finished loading');
             var character = new Character({
                 availableStates: Constants.ninjaState,
                 commands: Constants.commandMap
@@ -20,6 +21,16 @@ module.exports = {
                 character: character,
                 nbMaxSteps: Constants.nbMaxSteps
             });
+
+            //for(var i=0; i<1; i++) {
+            //    var mesh = gameEngine.getModel(Constants.Models.Piraken);
+            //    mesh.rotation.y = 0.5 * Math.PI;
+            //    mesh.position.y = 5;
+            //    mesh.position.x = -i;
+            //    var scale = 10;
+            //    mesh.scale.set(scale, scale, scale);
+            //    gameEngine.addSceneElement(mesh);
+            //}
 
             var ninja = new Ninja(character);
             window.ninja = ninja;
@@ -33,7 +44,8 @@ module.exports = {
             //gameEngine.addRenderElement(require("./gameEngine/controls/orbitControls"));
 
             gameEngine.setCamera(require("./gameElements/camera"));
-            gameEngine.addSceneElement(require("./gameElements/light"));
+            //gameEngine.addSceneElement(require("./gameElements/light"));
+            gameEngine.addSceneElement(require("./gameElements/directionalLight"));
 
             gameEngine.addSceneAnimatedElement(ninja.mesh);
 
@@ -45,8 +57,6 @@ module.exports = {
             setInterval(function () {
                 if(!gameplay.goNextStep())
                     ninja.updateState("DEATH")
-
-
             }, Constants.timeBetweenSteps);
         });
     },

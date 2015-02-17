@@ -15,15 +15,17 @@ module.exports = {
         ALGATANA: {
             counter: ['JUMP'],
             name: "ALGATANA"
-        },
+        }
+        ,
         PYRAKEN: {
             counter: ['ATTACK'],
             name: "PYRAKEN"
-        },
-        IVREROCHER: {
-            counter: ['SLIDE'],
-            name: "IVREROCHER"
         }
+        //,
+        //IVREROCHER: {
+        //    counter: ['SLIDE'],
+        //    name: "IVREROCHER"
+        //}
     },
     commandMap: {
         'UP': 'JUMP',
@@ -51,7 +53,8 @@ module.exports = {
     Paths: {
         Models: {
             Ninja: "assets/3d/ninja/ninja.json"
-            //Algatana: "assets/3d/Katanalgue/Katanalgue.json"
+            //,Algatana: "assets/3d/katanalgue/katanalgue.dae"
+            ,Piraken: "assets/3d/Piraken/Piraken.dae"
         },
 
         Skins: {
@@ -61,7 +64,9 @@ module.exports = {
         }
     },
     Models: {
-        Ninja: "Ninja"
+        Ninja: "Ninja",
+        Algatana: "Algatana",
+        Piraken: "Piraken"
     },
     TerrainSize: {
         width: 60,

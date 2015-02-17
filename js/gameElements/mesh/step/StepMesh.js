@@ -4,7 +4,7 @@ var timeManager = require('../../../timeManager');
 function StepMesh(step) {
     this.createMesh();
     this.stepType = step.state.name;
-    //this.mesh.position.x = - 20;
+    this.mesh.position.x = - 20;
 }
 
 StepMesh.prototype.updatePosition = function(rank) {

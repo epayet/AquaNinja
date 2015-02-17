@@ -1,4 +1,6 @@
 var async = require("async");
+var loaderFactory = require('./loader/loaderFactory');
+var eventListener = require('./eventListener');
 
 var camera;
 var scene = new THREE.Scene;
@@ -8,8 +10,6 @@ var models = {};
 var renderer;
 var clock = new THREE.Clock();
 var limitTerrain;
-
-var eventListener = require('./eventListener');
 
 window.onkeydown = eventListener.create('onKeyDown');
 window.onkeyup = eventListener.create('onKeyUp');
@@ -69,11 +69,11 @@ module.exports = {
     },
 
     loadModels: function(modelPaths, callback) {
-        var loader = new THREE.JSONLoader();
-
         var loadCallbacks = [];
-        for(var modelName in modelPaths)
-            loadCallbacks.push(createLoadModelCallback(modelPaths[modelName], modelName));
+        for(var modelName in modelPaths) {
+            var loader = loaderFactory(modelPaths[modelName]);
+            loadCallbacks.push(loader.createCallback(modelPaths[modelName], modelName));
+        }
 
         async.parallel(loadCallbacks, function(err, results) {
             for(var i=0; i<results.length; i++) {
@@ -81,20 +81,10 @@ module.exports = {
             }
             callback();
         });
+    },
 
-        function createLoadModelCallback(path, name) {
-            return function(callback) {
-                loader.load(path, function (geometry, material) {
-                    callback(null, {
-                        value: {
-                            geometry: geometry,
-                            material: material
-                        },
-                        name: name
-                    });
-                });
-            };
-        }
+    getModel: function(modelName) {
+        return models[modelName]();
     },
 
     start: function() {
