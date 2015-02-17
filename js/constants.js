@@ -54,7 +54,7 @@ module.exports = {
     Paths: {
         Models: {
             Ninja: "assets/3d/ninja/ninja.json"
-            ,Algatana: "assets/3d/katanalgue/katana.dae"
+            ,Algatana: "assets/3d/Katanalgue/katana.dae"
             ,Piraken: "assets/3d/Piraken/Piraken.dae"
         },
 
