@@ -17,11 +17,11 @@ module.exports = {
             counter: ['JUMP'],
             name: "ALGATANA"
         }
-        //,
-        //PYRAKEN: {
-        //    counter: ['ATTACK'],
-        //    name: "PYRAKEN"
-        //}
+        ,
+        PYRAKEN: {
+            counter: ['ATTACK'],
+            name: "PYRAKEN"
+        }
         //,
         //IVREROCHER: {
         //    counter: ['SLIDE'],
@@ -47,7 +47,7 @@ module.exports = {
         'SLIDE': 'death',
         'DEATH': 'frontdeath'
     },
-    timeBetweenSteps: 2000,
+    timeBetweenSteps: 500,
     distanceBetweenSteps: 20,
     nbMaxStepsOnScreen: 10,
     nbMaxSteps: 100,

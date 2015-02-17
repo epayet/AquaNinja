@@ -17,9 +17,15 @@ Generator.prototype.getAvailableStates = function() {
 Generator.prototype.generate = function(start) {
     if(start === undefined) start = 0;
     var steps = [];
+    var stepRandom = 0;
     for(var i=0; i<this.nbMaxSteps; i++) {
-        var randomStepName = this.getRandomStep();
-        steps.push(new Step({rank: start + i, state: this.stepStates[randomStepName]}));
+        var stepName = 'NOTHING';
+        if(stepRandom == 5) {
+            stepName = this.getRandomStep();
+            stepRandom = 0;
+        }
+        stepRandom++;
+        steps.push(new Step({rank: start + i, state: this.stepStates[stepName]}));
     }
     return steps;
 };

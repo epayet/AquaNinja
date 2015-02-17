@@ -45,7 +45,8 @@ Gameplay.prototype.goNextStep = function() {
         }
     }
     this.updateSteps();
-    return !this.isDead(newState, newStep);
+    //return !this.isDead(newState, newStep);
+    return false;
 };
 
 Gameplay.prototype.getNextXSteps = function(nbSteps) {

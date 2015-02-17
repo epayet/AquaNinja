@@ -24,8 +24,8 @@ Ninja.prototype.createMesh = function() {
 Ninja.prototype.updateState = function(state) {
     if(state != this.previousState) {
         var animation = this.getAnimationForState(state);
-        if(state != Constants.ninjaState.DEFAULT)
-            this.mesh.playAnimationOnce = true;
+        //if(state != Constants.ninjaState.DEFAULT)
+        //    this.mesh.playAnimationOnce = true;
         this.mesh.playAnimation(animation, this.mesh.defaultAnimationTime);
     }
     this.previousState = state;
