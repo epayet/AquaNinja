@@ -8,6 +8,7 @@ var width, height;
 var renderElements = [], animatedElements = [], cameraObservationElements = [];
 var models = {};
 var renderer;
+var otherScenesAndCameras = [];
 var clock = new THREE.Clock();
 var limitTerrain;
 
@@ -20,11 +21,26 @@ module.exports = {
     },
     setCamera: function(newCamera) {
         camera = newCamera;
-        camera.lookAt(scene.position);
+        //camera.lookAt(scene.position);
     },
 
     getCamera: function() {
         return camera;
+    },
+
+    getScene: function() {
+        return scene;
+    },
+
+    getRenderer: function() {
+        return renderer;
+    },
+
+    addSceneAndCamera: function(newScene, newCamera) {
+        otherScenesAndCameras.push({
+            scene: newCamera,
+            camera: newCamera
+        });
     },
 
     addEventListener: function(eventType, callback) {
@@ -120,6 +136,7 @@ function initRenderer() {
 }
 
 function render() {
+    renderer.autoClear = false;
     var delta = clock.getDelta();
     for(var i=0; i<renderElements.length; i++) {
         renderElements[i].update(delta);
@@ -144,6 +161,9 @@ function render() {
     // render using requestAnimationFrame
     requestAnimationFrame(render);
     renderer.render(scene, camera);
+    for(var i=0; i<otherScenesAndCameras.length; i++) {
+        renderer.render(otherScenesAndCameras[i].scene, otherScenesAndCameras[i].camera);
+    }
 }
 
 function isStillInScreen(element) {

@@ -10,6 +10,7 @@ var StepManager = require('./gameElements/mesh/step/StepManager');
 module.exports = {
     init: function(width, height) {
         gameEngine.setLimitTerrain(Constants.TerrainSize.height);
+        gameEngine.setCamera(require("./gameElements/camera"));
         gameEngine.loadModels(Constants.Paths.Models, function () {
             console.log('finished loading');
             var character = new Character({
@@ -43,13 +44,13 @@ module.exports = {
             gameEngine.addRenderElement(require("./gameEngine/misc/stats"));
             //gameEngine.addRenderElement(require("./gameEngine/controls/orbitControls"));
 
-            gameEngine.setCamera(require("./gameElements/camera"));
             //gameEngine.addSceneElement(require("./gameElements/light"));
             gameEngine.addSceneElement(require("./gameElements/directionalLight"));
 
             gameEngine.addSceneAnimatedElement(ninja.mesh);
-
             gameEngine.start();
+            //gameEngine.addSceneElement(require('./gameElements/mesh/background'));
+            gameEngine.addRenderElement(require('./gameElements/mesh/background'));
 
             var commandListener = new CommandListener(character);
             gameEngine.addEventListener("onKeyDown", commandListener.createCallback());

@@ -53,14 +53,15 @@ module.exports = {
     Paths: {
         Models: {
             Ninja: "assets/3d/ninja/ninja.json"
-            //,Algatana: "assets/3d/katanalgue/katanalgue.dae"
+            ,Algatana: "assets/3d/katanalgue/katana.dae"
             ,Piraken: "assets/3d/Piraken/Piraken.dae"
         },
 
         Skins: {
             Ninja: "assets/3d/ninja/nskinbr.jpg",
             Algatana: "assets/3d/Katanalgue/KatanaPommeau",
-            Sand: "assets/textures/saand.jpg"
+            Sand: "assets/textures/saand.jpg",
+            background: "assets/textures/0df8f20dd9eefcb7bdedacd76abc9b97_large.jpeg"
         }
     },
     Models: {
@@ -69,7 +70,7 @@ module.exports = {
         Piraken: "Piraken"
     },
     TerrainSize: {
-        width: 60,
-        height: 50
+        width: 15,
+        height: 200
     }
 };
