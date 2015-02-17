@@ -1,4 +1,3 @@
-var stepFactory = require('./stepFactory');
 var Constants = require('../../../constants');
 var stepPool = require('./stepPool');
 

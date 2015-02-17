@@ -17,7 +17,8 @@ module.exports = {
             });
             var gameplay = new Gameplay({
                 stepStates: Constants.stepState,
-                character: character
+                character: character,
+                nbMaxSteps: Constants.nbMaxSteps
             });
 
             var ninja = new Ninja(character);
@@ -41,7 +42,10 @@ module.exports = {
             gameEngine.addEventListener("onKeyDown", commandListener.createCallback());
 
             setInterval(function () {
-                gameplay.goNextStep();
+                if(!gameplay.goNextStep())
+                    ninja.updateState("DEATH")
+
+
             }, Constants.timeBetweenSteps);
         });
     },

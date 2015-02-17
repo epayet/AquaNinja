@@ -13,7 +13,7 @@ Ground.setPositionForRank = function(rank, plane) {
     plane.rotation.x = -0.5 * Math.PI;
     plane.position.x = 0;
     plane.position.y = 0;
-    plane.position.z = rank * -Constants.TerrainSize.height;
+    plane.position.z = rank * -Constants.TerrainSize.height + 1;
 };
 
 function createMesh(rank) {

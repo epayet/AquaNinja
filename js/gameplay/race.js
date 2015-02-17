@@ -27,5 +27,18 @@ module.exports = {
 
     getStepAfter: function(nbSteps) {
         return steps[stepsPassed + nbSteps];
+    },
+
+    getStepsPassed: function() {
+        return stepsPassed;
+    },
+
+    addSteps: function(nextSteps) {
+        steps = steps.concat(nextSteps);
+        console.log(steps);
+    },
+
+    getSteps: function () {
+        return steps;
     }
 };

@@ -4,7 +4,8 @@ module.exports = {
         DEFAULT: 'RUN',
         ATTACK: 'ATTACK',
         JUMP: 'JUMP',
-        SLIDE: 'SLIDE'
+        SLIDE: 'SLIDE',
+        DEATH: 'DEATH'
     },
     stepState: {
         NOTHING: {
@@ -40,15 +41,17 @@ module.exports = {
         'RUN': 'walk',
         'JUMP': 'backflip', // jump, backflip
         'ATTACK': 'spinningattack', //spinning, spin, punch, jump
-        'SLIDE': 'death'
+        'SLIDE': 'death',
+        'DEATH': 'frontdeath'
     },
-    timeBetweenSteps: 3000,
+    timeBetweenSteps: 2000,
     distanceBetweenSteps: 30,
     nbMaxStepsOnScreen: 10,
+    nbMaxSteps: 100,
     Paths: {
         Models: {
-            Ninja: "assets/3d/ninja/ninja.json",
-            Algatana: "assets/3d/Katanalgue/Katanalgue.json"
+            Ninja: "assets/3d/ninja/ninja.json"
+            //Algatana: "assets/3d/Katanalgue/Katanalgue.json"
         },
 
         Skins: {

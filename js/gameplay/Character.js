@@ -20,15 +20,12 @@ Character.prototype.getStateForCommand = function(command) {
 };
 
 Character.prototype.updateState = function() {
-    if(this.state != this.nextState) {
-        this.state = this.nextState;
-    } else
-        this.state = this.availableStates.DEFAULT;
-
+    this.state = this.nextState;
     this.nextState = this.availableStates.DEFAULT;
     for(var i=0; i<this.listeners["onStateUpdated"].length; i++) {
         this.listeners["onStateUpdated"][i](this.state);
     }
+    return this.state;
 };
 
 Character.prototype.resetState = function() {

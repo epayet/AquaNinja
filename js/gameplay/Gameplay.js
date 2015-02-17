@@ -1,5 +1,5 @@
 var race = require('./race');
-var Step = require('./Step');
+var Generator = require('./generator');
 
 var Gameplay = function(options) {
     this.stepStates = options.stepStates;
@@ -8,27 +8,20 @@ var Gameplay = function(options) {
     this.listeners = {
         onNextStep: []
     };
+    this.nbMaxSteps = options.nbMaxSteps;
+    this.generator = new Generator({
+        stepStates: options.stepStates,
+        nbMaxSteps: options.nbMaxSteps
+    });
+    var self = this;
+    this.addEventListener("onNextStep", function (step) {
+        self.generator.onNextStep(step);
+    });
     this.initSteps();
 };
 
 Gameplay.prototype.initSteps = function () {
-    var stepStates = this.stepStates;
-    var steps = [];
-
-    //TODO El Generator
-    var availableSteps = [];
-    for(var key in stepStates) {
-        availableSteps.push(key);
-    }
-    var nbSteps = availableSteps.length;
-
-    for(var i=0; i<100; i++) {
-        var rand = Math.floor(Math.random() * nbSteps);
-        var randomStepName = availableSteps[rand];
-        if(randomStepName != 'NOTHING')
-            steps.push(new Step({rank: i, state: stepStates[randomStepName]}));
-    }
-
+    var steps = this.generator.generate();
     race.setSteps(steps);
 };
 
@@ -42,8 +35,8 @@ Gameplay.prototype.goNextStep = function() {
     for(var i=0; i<this.listeners["onNextStep"].length; i++) {
         this.listeners["onNextStep"][i]();
     }
-    console.log('nextStep');
-    //return this.isDead(newState, newStep);
+    this.updateSteps();
+    return !this.isDead(newState, newStep);
 };
 
 Gameplay.prototype.getNextXSteps = function(nbSteps) {
@@ -56,6 +49,16 @@ Gameplay.prototype.getStepAfter = function(nbStepAfter) {
 
 Gameplay.prototype.updateStep = function() {
     return race.goNextStep();
+};
+
+Gameplay.prototype.updateSteps = function() {
+    var stepsPassed = race.getStepsPassed();
+    var steps = race.getSteps();
+    var limit = (steps.length * 70) / 100;
+    if(stepsPassed > limit) {
+        var nextSteps = this.generator.generate();
+        race.addSteps(nextSteps);
+    }
 };
 
 Gameplay.prototype.isDead = function(state, step) {
