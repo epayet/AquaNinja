@@ -136,7 +136,11 @@ function render() {
     }
 
     for(var i=0; i<animatedElements.length; i++) {
-        animatedElements[i].updateAnimation(delta * 1000);
+        var mesh = animatedElements[i];
+        mesh.updateAnimation(delta * 1000);
+        if(mesh.playAnimationOnce && mesh.currentKeyframe == mesh.endKeyframe) {
+            mesh.playAnimation(mesh.defaultAnimation, mesh.defaultAnimationTime);
+        }
     }
 
     for(var i=0; i<cameraObservationElements.length; i++) {
@@ -152,7 +156,6 @@ function render() {
     renderer.render(scene, camera);
 }
 
-//TODO
 function isStillInScreen(element) {
     return !(element.position.z > limitTerrain);
 }

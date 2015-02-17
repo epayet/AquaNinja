@@ -22,6 +22,7 @@ module.exports = {
             });
 
             var ninja = new Ninja(character);
+            window.ninja = ninja;
             groundManager.start();
 
             var stepManager = new StepManager(gameplay);
